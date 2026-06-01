@@ -1,0 +1,17 @@
+# Dependências (não enviar pro GitHub - são reinstaladas com npm install)
+node_modules/
+
+# Arquivos de build
+dist/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Variáveis de ambiente
+.env
+.env.local
