@@ -1,6 +1,16 @@
 <template>
-  <v-container fluid class="fill-height d-flex align-center justify-center login-bg">
-    <v-card class="login-card pa-8" width="420" rounded="xl" elevation="16">
+  <v-container
+    fluid
+    class="fill-height d-flex align-center justify-center"
+    style="background: radial-gradient(ellipse at center, #161b22 0%, #0d1117 100%);"
+  >
+    <v-card
+      width="420"
+      rounded="xl"
+      elevation="16"
+      class="pa-8"
+      style="background: rgba(22, 27, 34, 0.95); border: 1px solid rgba(0, 180, 216, 0.2); backdrop-filter: blur(12px);"
+    >
       <div class="text-center mb-6">
         <v-icon size="64" color="primary" class="mb-3">mdi-memory</v-icon>
         <h1 class="text-h5 font-weight-bold">Catálogo de Hardware</h1>
@@ -14,7 +24,6 @@
         size="large"
         variant="outlined"
         :loading="carregando"
-        class="google-btn"
         @click="fazerLogin"
       >
         <template #prepend>
@@ -67,23 +76,3 @@ async function fazerLogin() {
   }
 }
 </script>
-
-<style scoped>
-.login-bg {
-  min-height: 100vh;
-  background: radial-gradient(ellipse at center, #161b22 0%, #0d1117 100%);
-}
-.login-card {
-  background: rgba(22, 27, 34, 0.95) !important;
-  border: 1px solid rgba(0, 180, 216, 0.2) !important;
-  backdrop-filter: blur(12px);
-}
-.google-btn {
-  border-color: rgba(255, 255, 255, 0.2) !important;
-  transition: all 0.2s ease;
-}
-.google-btn:hover {
-  border-color: rgba(0, 180, 216, 0.6) !important;
-  background: rgba(0, 180, 216, 0.08) !important;
-}
-</style>
