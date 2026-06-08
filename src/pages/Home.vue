@@ -1,7 +1,5 @@
 <template>
   <v-container class="py-10">
-
-    <!-- Título da Home -->
     <div class="text-center mb-8">
       <v-icon size="72" color="primary">mdi-memory</v-icon>
       <h1 class="text-h3 font-weight-bold mt-3">Catálogo de Hardware Usado</h1>
@@ -10,7 +8,6 @@
       </p>
     </div>
 
-    <!-- Estatísticas usando o componente EstatisticasBox -->
     <v-row class="mb-8" justify="center">
       <v-col cols="12" sm="4">
         <EstatisticasBox :total="totalItens" label="Total de Peças" />
@@ -20,7 +17,6 @@
       </v-col>
     </v-row>
 
-    <!-- Botões de navegação -->
     <div class="d-flex justify-center ga-4">
       <v-btn color="primary" size="large" to="/lista">
         <v-icon left>mdi-format-list-bulleted</v-icon>
@@ -31,7 +27,6 @@
         Cadastrar Peça
       </v-btn>
     </div>
-
   </v-container>
 </template>
 
@@ -40,7 +35,6 @@ import { computed } from 'vue'
 import { itens } from '../store/itens'
 import EstatisticasBox from '../components/EstatisticasBox.vue'
 
-// Computed = valor calculado automaticamente quando a lista mudar
 const totalItens    = computed(() => itens.value.length)
 const itensTestados = computed(() => itens.value.filter(i => i.testado).length)
 </script>

@@ -1,10 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import vuetify from './plugins/vuetify'
-import router from './router/index'
+import { registerPlugins } from './plugins/index'
 
-// Cria o app Vue e registra os plugins
 const app = createApp(App)
-app.use(vuetify)
-app.use(router)
+registerPlugins(app)
 app.mount('#app')

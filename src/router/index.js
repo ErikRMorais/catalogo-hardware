@@ -1,22 +1,32 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
-import Home from '../pages/Home.vue'
-import Lista from '../pages/Lista.vue'
+import { useUserStore } from '../stores/user'
+import Login    from '../pages/Login.vue'
+import Home     from '../pages/Home.vue'
+import Lista    from '../pages/Lista.vue'
 import Cadastro from '../pages/Cadastro.vue'
-import Sobre from '../pages/Sobre.vue'
+import Sobre    from '../pages/Sobre.vue'
 
-// Define as 4 rotas do app
 const routes = [
-  { path: '/',          component: Home     },
-  { path: '/lista',     component: Lista    },
-  { path: '/cadastro',  component: Cadastro },
+  { path: '/login',        component: Login    },
+  { path: '/',             component: Home     },
+  { path: '/lista',        component: Lista    },
+  { path: '/cadastro',     component: Cadastro },
   { path: '/cadastro/:id', component: Cadastro },
-  { path: '/sobre',     component: Sobre    },
+  { path: '/sobre',        component: Sobre    },
 ]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+})
+
+router.beforeEach((to, _from, next) => {
+  const userStore = useUserStore()
+  if (to.path !== '/login' && !userStore.isLoggedIn) {
+    next('/login')
+  } else {
+    next()
+  }
 })
 
 export default router
