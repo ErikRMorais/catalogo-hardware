@@ -11,8 +11,8 @@
         Integrantes
       </v-card-title>
       <v-card-text>
-        <p><strong>Aluno 1:</strong> (seu nome aqui) — Matrícula: 000001</p>
-        <p><strong>Aluno 2:</strong> (seu nome aqui) — Matrícula: 000002</p>
+        <p><strong>Aluno 1:</strong> ERIK ROBERTO DE S. MORAIS</p>
+        <p><strong>Aluno 2:</strong> LUIZ HENRIQUE M. XAVIER</p>
       </v-card-text>
     </v-card>
 

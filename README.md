@@ -4,8 +4,8 @@
 **Disciplina:** Frameworks Modernos para Desenvolvimento de Sistemas — UNEMAT 2026/1
 
 ## Integrantes
-- Aluno 1: (nome) — Matrícula: 000001
-- Aluno 2: (nome) — Matrícula: 000002
+- Aluno 1: ERIK ROBERTO DE S. MORAIS
+- Aluno 2: LUIZ HENRIQUE M. XAVIER
 
 ## Descrição
 Mini-aplicação Vue 3 + Vuetify + Vue Router com CRUD completo para gerenciar peças de computador usadas (processadores, memórias, GPUs, etc.).
