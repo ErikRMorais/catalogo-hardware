@@ -29,18 +29,21 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { itens, excluir } from '../store/itens'
+import { itens, carregarItens, excluir } from '../store/itens'
 import ItemCard from '../components/ItemCard.vue'
 
 const router = useRouter()
+
+onMounted(() => carregarItens())
 
 function irParaEdicao(item) {
   router.push('/cadastro/' + item.id)
 }
 
-function confirmarExclusao(id) {
+async function confirmarExclusao(id) {
   const confirmou = confirm('Tem certeza que deseja excluir esta peça?')
-  if (confirmou) excluir(id)
+  if (confirmou) await excluir(id)
 }
 </script>

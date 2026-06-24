@@ -49,7 +49,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { itens, salvar } from '../store/itens'
+import { itens, carregarItens, salvar } from '../store/itens'
 
 const router = useRouter()
 const route  = useRoute()
@@ -66,23 +66,22 @@ const form = ref({
 
 const estaEditando = computed(() => !!route.params.id)
 
-onMounted(() => {
+onMounted(async () => {
   if (estaEditando.value) {
+    if (itens.value.length === 0) await carregarItens()
     const id = Number(route.params.id)
     const itemEncontrado = itens.value.find(x => x.id === id)
-    if (itemEncontrado) {
-      form.value = { ...itemEncontrado }
-    }
+    if (itemEncontrado) form.value = { ...itemEncontrado }
   }
 })
 
-function salvarItem() {
+async function salvarItem() {
   if (!form.value.nome || !form.value.categoria) {
     alert('Preencha o nome e a categoria!')
     return
   }
   form.value.preco = Number(form.value.preco)
-  salvar(form.value)
+  await salvar(form.value)
   router.push('/lista')
 }
 </script>

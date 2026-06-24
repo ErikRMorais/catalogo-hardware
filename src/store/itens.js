@@ -1,20 +1,37 @@
 import { ref } from 'vue'
+import { useUserStore } from '../stores/user'
 
-export const itens = ref([
-  { id: 1, nome: 'Intel Core i5-10400F', categoria: 'Processador', preco: 350, testado: true },
-  { id: 2, nome: 'GTX 1660 Super', categoria: 'Placa de Vídeo', preco: 800, testado: true },
-  { id: 3, nome: 'Kingston 16GB DDR4', categoria: 'Memória', preco: 180, testado: false },
-])
+const BASE = 'http://localhost:3001'
 
-export function salvar(item) {
-  if (item.id) {
-    const indice = itens.value.findIndex(x => x.id === item.id)
-    itens.value[indice] = { ...item }
-  } else {
-    itens.value.push({ ...item, id: Date.now() })
+function getHeaders() {
+  const token = useUserStore().user?.idToken
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`,
   }
 }
 
-export function excluir(id) {
+async function req(path, options = {}) {
+  const res = await fetch(BASE + path, { ...options, headers: getHeaders() })
+  return res.json()
+}
+
+export const itens = ref([])
+
+export async function carregarItens() {
+  itens.value = await req('/items')
+}
+
+export async function salvar(item) {
+  if (item.id) {
+    await req(`/items/${item.id}`, { method: 'PUT', body: JSON.stringify(item) })
+  } else {
+    await req('/items', { method: 'POST', body: JSON.stringify(item) })
+  }
+  await carregarItens()
+}
+
+export async function excluir(id) {
+  await req(`/items/${id}`, { method: 'DELETE' })
   itens.value = itens.value.filter(x => x.id !== id)
 }

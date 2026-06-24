@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth'
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onIdTokenChanged } from 'firebase/auth'
 import { useRouter } from 'vue-router'
 import '@/firebase/config'
 
@@ -15,12 +15,12 @@ export const useUserStore = defineStore('user', () => {
     const provider = new GoogleAuthProvider()
     try {
       const result = await signInWithPopup(auth, provider)
-      const credential = GoogleAuthProvider.credentialFromResult(result)
+      const idToken = await result.user.getIdToken()
       user.value = {
         displayName: result.user.displayName,
         email: result.user.email,
         photoURL: result.user.photoURL,
-        accessToken: credential?.accessToken ?? null,
+        idToken,
       }
       router.push('/')
     } catch (error) {
@@ -28,6 +28,12 @@ export const useUserStore = defineStore('user', () => {
       throw error
     }
   }
+
+  onIdTokenChanged(auth, async (firebaseUser) => {
+    if (firebaseUser && user.value) {
+      user.value.idToken = await firebaseUser.getIdToken()
+    }
+  })
 
   async function logout() {
     try {
